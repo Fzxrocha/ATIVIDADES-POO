@@ -1,46 +1,44 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        
-        telefone telefoneAluno = new telefone();
-        telefoneAluno.setTipo("Celular");
-        telefoneAluno.setDdd("55");
-        telefoneAluno.setNumero("123456789");
+        // Utilizando try-with-resources para o Scanner
+        try (Scanner scanner = new Scanner(System.in)) {
+            // Criando um livro
+            System.out.print("Digite o título do livro: ");
+            String tituloLivro = scanner.nextLine();
 
-        Endereco enderecoAluno = new Endereco();
-        enderecoAluno.setRua("Rua A");
-        enderecoAluno.setCidade("Cidade X");
-        enderecoAluno.setEstado("Estado Y");
+            System.out.print("Digite o autor do livro: ");
+            String autorLivro = scanner.nextLine();
 
-        Aluno aluno = new Aluno();
-        aluno.setNome("Joao");
-        aluno.setCpf("123.456.789-01");
-        aluno.setEmail("joao@gmail.com");
-        aluno.addTelefone(telefoneAluno);
-        aluno.setEndereco(enderecoAluno);
+            System.out.print("Digite o número de páginas do livro: ");
+            int numPaginasLivro = scanner.nextInt();
 
-        Curso curso = new Curso();
-        curso.setNome("Engenharia de Software");
+            Livro meuLivro = new Livro(tituloLivro, autorLivro, numPaginasLivro);
 
-        Professor professor = new Professor();
-        professor.setNome("Doutor Silva");
-        professor.setTitulacao("Doutorado");
-        professor.setSalario(5000.00);
-        professor.addCursos(curso);
+            // Criando uma fatura
+            System.out.print("Digite o número da fatura: ");
+            scanner.nextLine(); // Consumir a quebra de linha pendente
+            String numeroFatura = scanner.nextLine();
 
-        
-        aluno.setCurso(curso);
+            System.out.print("Digite a descrição da fatura: ");
+            String descricaoFatura = scanner.nextLine();
 
-        Disciplina disciplina = new Disciplina();
-        disciplina.addAluno(aluno);
-        disciplina.addCurso(curso);
-        disciplina.addProfessor(professor);
+            System.out.print("Digite a quantidade comprada: ");
+            int quantidadeFatura = scanner.nextInt();
 
-        
-        aluno.imprimir();
-        curso.imprimirCurso();
-        professor.imprimir();
-        
-        
-      
+            System.out.print("Digite o preço por item: ");
+            double precoPorItemFatura = scanner.nextDouble();
+
+            Fatura minhaFatura = new Fatura(numeroFatura, descricaoFatura, quantidadeFatura, precoPorItemFatura);
+
+            // Exibindo informações
+            meuLivro.imprimirInfo();
+
+            System.out.println("Número: " + minhaFatura.numero +
+                    "\nDescrição: " + minhaFatura.getDescricao() +
+                    "\nPreço por Item: " + minhaFatura.getPrecoPorItem() +
+                    "\nTotal da Fatura: $" + minhaFatura.getTotalFatura());
+        } // O Scanner será fechado automaticamente ao sair do bloco try
     }
 }
